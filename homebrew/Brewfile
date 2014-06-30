@@ -4,3 +4,4 @@ install wget
 install memcached
 install redis
 install git
+install elasticsearch

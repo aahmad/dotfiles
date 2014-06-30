@@ -1,0 +1,11 @@
+export PATH="$HOME/.rbenv/bin:$PATH:/Applications/Postgres.app/Contents/Versions/9.3/bin"
+export TERM="xterm-color"
+
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LANG="en_US.UTF-8"
+
+eval "$(rbenv init -)"
+
+[ -f ~/.bashrc ] && source ~/.bashrc
