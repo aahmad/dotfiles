@@ -1,5 +1,14 @@
 " Configuration file for vim
 set nocompatible
+filetype off
+
+" Using Vundle: https://github.com/gmarik/Vundle.vim
+set runtimepath+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Core
+Plugin 'gmarik/vundle'
+
 set number
 " Prevent modelines in files from being evaluated (avoids a potential
 " security problem wherein a malicious user could write a hazardous
