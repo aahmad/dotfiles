@@ -1,0 +1,6 @@
+# Gemfile for Homebrew
+# Run brew bundle to install
+install wget
+install memcached
+install redis
+install git
