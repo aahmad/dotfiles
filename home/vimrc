@@ -1,14 +1,5 @@
 " Configuration file for vim
 set nocompatible
-filetype off
-
-" Using Vundle: https://github.com/gmarik/Vundle.vim
-set runtimepath+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Core
-Plugin 'gmarik/vundle'
-
 set number
 " Prevent modelines in files from being evaluated (avoids a potential
 " security problem wherein a malicious user could write a hazardous
@@ -21,9 +12,13 @@ set modelines=0
 set nocompatible	" Use Vim defaults instead of 100% vi compatibility
 set backspace=indent,eol,start	" more powerful backspacing
 
-set background=dark
+set background=dark 
 set cpoptions=aABceFsmq
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+
+execute pathogen#infect()
+filetype plugin indent on
+autocmd VimEnter * if !argc() | NERDTree | endif
 
 " Indent
 set ai
@@ -32,8 +27,8 @@ set et
 " " set sw=4
 " " set ts=4
 
-" Now we set some defaults for the editor
-" set autoindent		" always set autoindenting on
+" Now we set some defaults for the editor 
+set autoindent		" always set autoindenting on
 set textwidth=0		" Don't wrap words by default
 set nobackup		" Don't keep a backup file
 set viminfo='20,\"50	" read/write a .viminfo file, don't store more than
@@ -48,8 +43,8 @@ set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.i
 " We know xterm-debian is a color terminal
 if &term =~ "xterm-debian" || &term =~ "xterm-xfree86"
   set t_Co=16
-  set t_Sf=%dm
-  set t_Sb=%dm
+  set t_Sf=[3%dm
+  set t_Sb=[4%dm
 endif
 
 " Make p in Visual mode replace the selected text with the "" register.
@@ -57,11 +52,14 @@ vnoremap p <Esc>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
-syntax on
+syntax enable
+" set relativenumber   
+"set background=light
+"colorscheme solarized
 
 " Remember last line pos when re-opening an edited file
-set viminfo='10,\"100,:20,%,n~/.viminfo
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+set viminfo='10,\"100,:20,%,n~/.viminfo 
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif 
 
 " Debian uses compressed helpfiles. We must inform vim that the main
 " helpfiles is compressed. Other helpfiles are stated in the tags-file.
@@ -102,7 +100,9 @@ map <F3> :set noignorecase<return>
 map <F4> :set ignorecase<return>
 
 " dupe tag and make an ending tag
-map <F5> GVgg:!mkvixml<return>
+" map <F5> GVgg:!mkvixml<return>
+"nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+autocmd FileType c,cpp,java,php,python,ruby,perl autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " run mikes mkxml command externally to clean up
 map <F9> :!mkvixml<return>
@@ -111,7 +111,7 @@ map <F9> :!mkvixml<return>
 map <tab> > gv
 map <backspace> < gv
 
-" tabspacing 2 
+" tabspacing 2
 set ts=2
 set sts=2
 set smartindent
@@ -121,11 +121,25 @@ set softtabstop=2
 set expandtab
 set smarttab
 
+"if has("gui_running")
+"   colorscheme metacosm
+"   set columns=180
+"   set guifont=Consolas:h10
+"   set guioptions=ce 
+"  set lines=55
+"   set mousehide
+"endif
+
 " a better way to see comments
 hi Comment  term=bold ctermfg=5 guifg=#80a0ff
 
 " allow auto completion for colons in class names in Perl
 set iskeyword+=:
+
+" nerdtree mapping
+nmap <silent> <F3> :NERDTreeToggle<CR>
+" buffer mapping
+nnoremap gb :ls<CR>:b<Space>
 
 " perltidy
 map ,pt <ESC>:'<,'>!perltidy -boc --paren-tightness=2 --entab-leading-whitespace=4 -mft=1<CR>
@@ -137,3 +151,8 @@ map ,rl <ESC>:%s/\n//<CR>
 map ,fx <ESC>:%!formatxml<CR>
 command Date !date
 map ,da <ESC>:Date<CR>
+
+let g:Perl_AuthorName      = 'Afra Ahmad'
+"let g:Perl_AuthorRef       = ''
+let g:Perl_Email           = 'afra@prongs.org'
+
