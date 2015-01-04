@@ -1,9 +1,11 @@
 # Gemfile for Homebrew
 # Run brew bundle to install
 install wget
+install caskroom/cask/brew-cask
 install memcached
 install redis
 install git
 install elasticsearch
 install irssi
+install ssh-copy-id
 
