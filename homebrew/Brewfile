@@ -8,4 +8,6 @@ install git
 install elasticsearch
 install irssi
 install ssh-copy-id
+install flac
+
 
