@@ -9,5 +9,5 @@ install elasticsearch
 install irssi
 install ssh-copy-id
 install flac
-
+install the_silver_searcher
 

@@ -1,0 +1,143 @@
+" Environment
+behave xterm
+syntax enable
+set nocompatible
+set title
+
+" encoding
+set encoding=utf-8
+try
+  lang en_US
+catch
+endtry
+
+" UI
+set antialias
+set lazyredraw
+
+set ruler
+set number
+
+set cmdheight=3
+set showmode
+set showcmd
+set more
+
+set showmatch
+set ttyfast
+
+" Theme
+syntax enable
+" set relativenumber
+set background=dark
+" solarized options
+if !has("gui_running")
+   let g:solarized_termtrans=1
+   let g:solarized_termcolors=256
+endif
+colorscheme solarized
+
+" Indent
+set ai
+set si
+set et
+
+" Normally we use vim-extensions. If you want true vi-compatibility
+" remove change the following statements
+" TEST
+
+set backspace=indent,eol,start	" more powerful backspacing
+
+set cpoptions=aABceFsmq
+set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+
+" Now we set some defaults for the editor 
+set autoindent		" always set autoindenting on
+set textwidth=0		" Don't wrap words by default
+set nobackup		" Don't keep a backup file
+set viminfo='20,\"50	" read/write a .viminfo file, don't store more than
+			" 50 lines of registers
+set history=50		" keep 50 lines of command line history
+set ruler		" show the cursor position all the time
+
+
+" Suffixes that get lower priority when doing tab completion for filenames.
+" These are files we are not likely to want to edit or read.
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+
+
+" Make p in Visual mode replace the selected text with the "" register.
+vnoremap p <Esc>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
+
+" a better way to see comments
+hi Comment  term=bold ctermfg=5 guifg=#80a0ff
+
+" allow auto completion for colons in class names in Perl
+set iskeyword+=:
+
+" NERDTreeType mapping
+autocmd VimEnter * if !argc() | NERDTree | endif
+
+" nmap <silent> <F3> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" buffer mapping
+nnoremap gb :ls<CR>:b<Space>
+
+
+" The following are commented out as they cause vim to behave a lot
+" different from regular vi. They are highly recommended though.
+set showcmd             " Show (partial) command in status line.
+set showmatch           " Show matching brackets.
+set ignorecase          " Do case insensitive matching
+set incsearch           " Incremental search
+set autowrite           " Automatically save before commands like :next and :make
+set hlsearch
+
+" make ending xml tag
+map <F2> 0v/\s*[<a-zA-Z0-9:\-_]*<return>hyo<esc>pa><esc>^a/<esc>
+
+" less style searches
+map \ /<return>
+
+" some autokeys
+map <F3> :set noignorecase<return>
+map <F4> :set ignorecase<return>
+
+" dupe tag and make an ending tag
+" map <F5> GVgg:!mkvixml<return>
+
+" Cut out empty end lines
+"nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+autocmd FileType c,cpp,java,php,python,ruby,perl autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+" run mikes mkxml command externally to clean up
+map <F9> :!mkvixml<return>
+
+" set tabbing and backspacing of multiline selects
+map <tab> > gv
+map <backspace> < gv
+
+" tabspacing 2
+set ts=2
+set sts=2
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set smarttab
+
+" vundle
+nnoremap <leader>vc :PluginClean<cr>
+nnoremap <leader>vl :PluginList<cr>
+nnoremap <leader>vi :PluginInstall<cr>
+nnoremap <leader>vu :PluginInstall!<cr>
+nnoremap <leader>vs :PluginSearch<space>
+
+" Ruby
+nnoremap <leader>tr :botright :vsplit config/routes.rb<cr>
+nnoremap <leader>tg :botright :vsplit Gemfile<cr>
+
+" Perl
+map ,pt <ESC>:'<,'>!perltidy -boc --paren-tightness=2 --entab-leading-whitespace=4 -mft=1<CR>
