@@ -13,7 +13,7 @@ endtry
 
 " UI
 set antialias
-set lazyredraw
+  set lazyredraw
 
 set ruler
 set number
@@ -30,12 +30,14 @@ set ttyfast
 syntax enable
 " set relativenumber
 set background=dark
+
 " solarized options
 if !has("gui_running")
    let g:solarized_termtrans=1
    let g:solarized_termcolors=256
 endif
-colorscheme solarized
+"colorscheme solarized
+"colorscheme railscasts
 
 " Indent
 set ai
@@ -81,9 +83,6 @@ autocmd VimEnter * if !argc() | NERDTree | endif
 " nmap <silent> <F3> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" buffer mapping
-nnoremap gb :ls<CR>:b<Space>
-
 
 " The following are commented out as they cause vim to behave a lot
 " different from regular vi. They are highly recommended though.
@@ -127,6 +126,9 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 set smarttab
+
+" buffer mapping
+nnoremap gb :ls<CR>:b<Space>
 
 " vundle
 nnoremap <leader>vc :PluginClean<cr>
