@@ -2,6 +2,7 @@
 [ -z "$PS1" ] && return
 
 export DOTFILES="$HOME/.dotfiles"
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 . $DOTFILES/bash/colors
 . $DOTFILES/bash/aliases
