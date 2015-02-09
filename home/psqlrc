@@ -5,8 +5,8 @@
 \set COMP_KEYWORD_CASE upper
 
 \encoding unicode
-\pset pager always
 
+\pset pager off
 \set QUIET 0
 
 -- switch to expanded table format for large tables
