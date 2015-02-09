@@ -140,6 +140,7 @@ nnoremap <leader>vs :PluginSearch<space>
 " Ruby
 nnoremap <leader>tr :botright :vsplit config/routes.rb<cr>
 nnoremap <leader>tg :botright :vsplit Gemfile<cr>
+nnoremap <silent> <leader>w :echo system("ruby -wc " . bufname("%"))<CR>
 
 " Perl
 map ,pt <ESC>:'<,'>!perltidy -boc --paren-tightness=2 --entab-leading-whitespace=4 -mft=1<CR>
