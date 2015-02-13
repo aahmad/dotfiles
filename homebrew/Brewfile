@@ -13,6 +13,7 @@ install tree
 install macvim
 install vim
 install the_silver_searcher
+install pow
 
 brew install caskroom/cask/brew-cask
 cask install alfred
