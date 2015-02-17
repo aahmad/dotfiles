@@ -14,6 +14,7 @@ install macvim
 install vim
 install the_silver_searcher
 install pow
+install postgresql
 
 brew install caskroom/cask/brew-cask
 cask install alfred
