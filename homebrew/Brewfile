@@ -1,7 +1,6 @@
 # Gemfile for Homebrew
 # Run brew bundle to install
 install wget
-install brew-cask
 install memcached
 install redis
 install git
@@ -16,7 +15,7 @@ install the_silver_searcher
 install pow
 install postgresql
 
-brew install caskroom/cask/brew-cask
+install caskroom/cask/brew-cask
 cask install alfred
 cask install iterm2
 cask install nvalt
