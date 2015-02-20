@@ -16,8 +16,18 @@ install the_silver_searcher
 install pow
 install postgresql
 
-brew install caskroom/cask/brew-cask
-cask install alfred
-cask install iterm2
-cask install nvalt
-cask install vox
+install caskroom/cask/brew-cask
+cask install --appdir="/Applications" alfred
+cask install --appdir="/Applications" iterm2
+cask install --appdir="/Applications" nvalt
+cask install --appdir="~/Applications" java
+cask install --appdir="/Applications" vox
+cask install --appdir="/Applications" vlc
+cask install --appdir="/Applications" skype
+cask install --appdir="/Applications" spotify
+cask install --appdir="/Applications" dropbox
+
+cask alfred link
+# cleanup
+brew cleanup --force
+rm -f -r /Library/Caches/Homebrew/*
