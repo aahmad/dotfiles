@@ -1,7 +1,6 @@
 # Gemfile for Homebrew
 # Run brew bundle to install
 install wget
-install brew-cask
 install memcached
 install redis
 install git
@@ -28,6 +27,7 @@ cask install --appdir="/Applications" spotify
 cask install --appdir="/Applications" dropbox
 
 cask alfred link
+
 # cleanup
 brew cleanup --force
 rm -f -r /Library/Caches/Homebrew/*
