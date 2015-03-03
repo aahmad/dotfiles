@@ -13,7 +13,7 @@ endtry
 
 " UI
 set antialias
-  set lazyredraw
+set lazyredraw
 
 set ruler
 set number
@@ -33,11 +33,14 @@ set background=dark
 
 " solarized options
 if !has("gui_running")
-   let g:solarized_termtrans=1
-   let g:solarized_termcolors=256
+"   let g:solarized_termtrans=1
+"   let g:solarized_termcolors=256
 endif
 "colorscheme solarized
 "colorscheme railscasts
+
+"let g:hybrid_use_iTerm_colors = 1
+colorscheme hybrid
 
 " Indent
 set ai
@@ -51,7 +54,8 @@ set et
 set backspace=indent,eol,start	" more powerful backspacing
 
 set cpoptions=aABceFsmq
-set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+"set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
+set statusline=%t%(\ [%n%M]%)%(\ %H%R%W%)\ %(%c-%v,\ %l\ of\ %L%)
 
 " Now we set some defaults for the editor 
 set autoindent		" always set autoindenting on

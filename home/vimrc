@@ -6,6 +6,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'Buffergator'
 Plugin 'nerdtree'
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plugin 'w0ng/vim-hybrid'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
