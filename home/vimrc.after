@@ -40,7 +40,9 @@ endif
 "colorscheme railscasts
 
 "let g:hybrid_use_iTerm_colors = 1
-colorscheme hybrid
+"colorscheme hybrid
+colorscheme jellybeans
+" colorscheme distinguished
 
 " Indent
 set ai
@@ -148,3 +150,40 @@ nnoremap <silent> <leader>w :echo system("ruby -wc " . bufname("%"))<CR>
 
 " Perl
 map ,pt <ESC>:'<,'>!perltidy -boc --paren-tightness=2 --entab-leading-whitespace=4 -mft=1<CR>
+
+" Tabularize
+
+vnoremap <leader>a<bar> :Tab /<bar><cr>
+nnoremap <leader>a<bar> :Tab /<bar><cr>
+
+vnoremap <leader>a<space> :Tab /[^ ]<space>\+\zs/l0l1<cr>
+nnoremap <leader>a<space> :Tab /[^ ]<space>\+\zs/l0l1<cr>
+
+" foo: 1
+" foobar: 2
+nnoremap <leader>a: :Tab /\w:\zs/l0l1<cr>
+vnoremap <leader>a: :Tab /\w:\zs/l0l1<cr>
+
+"    foo: 1
+" foobar: 2
+nnoremap <leader>ar: :Tab /\w:\zs/r0l1<cr>
+vnoremap <leader>ar: :Tab /\w:\zs/r0l1<cr>
+
+nnoremap <leader>a, :Tab /,\zs<cr>
+vnoremap <leader>a, :Tab /,\zs<cr>
+
+nnoremap <leader>a= :Tab /=<cr>
+vnoremap <leader>a= :Tab /=<cr>
+
+" :foo    => 1
+" :foobar => 2
+nnoremap <leader>a> :Tab /=><cr>
+vnoremap <leader>a> :Tab /=><cr>
+
+vnoremap <leader>am2 :Tab /<bar>/l1c1l1c1r1c1<cr>
+nnoremap <leader>am2 :Tab /<bar>/l1c1l1c1r1c1<cr>
+
+vnoremap <leader>am3 :Tab /<bar>/l1c1l1c1l1c1r1c1<cr>
+nnoremap <leader>am3 :Tab /<bar>/l1c1l1c1l1c1r1c1<cr>
+
+set listchars=tab:»·,trail:·,eol:¬,extends:#,nbsp:%,precedes:<
