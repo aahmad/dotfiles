@@ -32,6 +32,8 @@ cask install --appdir="/Applications" mou
 
 cask alfred link
 
+tap caskroom/fonts
+cask install font-source-code-pro
 # cleanup
 brew cleanup --force
 rm -f -r /Library/Caches/Homebrew/*
