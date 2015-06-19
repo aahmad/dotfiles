@@ -11,6 +11,7 @@ Plugin 'w0ng/vim-hybrid'
 Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular.git'
 Plugin 'tommcdo/vim-lion'
+Plugin 'AndrewRadev/splitjoin.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
