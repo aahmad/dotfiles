@@ -31,6 +31,21 @@ syntax enable
 " set relativenumber
 set background=dark
 
+if has("gui_running")
+  set scrolloff=3
+  set sidescrolloff=1
+  set guioptions=acemg
+  set guifont=source_code_pro:h12
+  set guifontwide=source_code_pro:h12
+  set guicursor=n:blinkon0,v:blinkon0
+  set noballooneval
+  set cursorline
+  set textwidth=120
+  set colorcolumn=+1,+2,+3
+  set linespace=1
+  set fuoptions=maxvert
+end
+
 " solarized options
 if !has("gui_running")
 "   let g:solarized_termtrans=1
@@ -42,6 +57,7 @@ endif
 "let g:hybrid_use_iTerm_colors = 1
 "colorscheme hybrid
 colorscheme jellybeans
+" colorscheme sexy-railscasts-256
 " colorscheme distinguished
 
 " Indent
@@ -85,6 +101,17 @@ set iskeyword+=:
 
 " NERDTreeType mapping
 autocmd VimEnter * if !argc() | NERDTree | endif
+let NERDTreeHijackNetrw = 1
+let NERDTreeQuitOnOpen  = 0
+let NERDTreeMinimalUI   = 1
+let g:NERDTreeWinSize   = 40
+
+nnoremap <leader>b :Bookmark<space>
+nnoremap <leader>n :let NERDTreeQuitOnOpen = 0<bar>NERDTreeToggle<cr>
+nnoremap <leader>N :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<cr>
+nnoremap <leader>f :NERDTreeFind<cr>
+nnoremap - :NERDTreeFind<cr>
+
 
 " nmap <silent> <F3> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
