@@ -2,32 +2,40 @@
 \set HISTFILE ~/.psql_history/- :DBNAME
 \set HISTSIZE 5000
 
+
 \set COMP_KEYWORD_CASE upper
 
 \encoding unicode
+-- \pset pager always
 
-\pset pager off
 \set QUIET 0
 
 -- switch to expanded table format for large tables
 -- \x auto
 
 -- \set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
-\set PROMPT1 '%[%033[30;1m%]%m/%/ %[%033[31;1m%]%R%#%[%033[0m%] '
+-- \set PROMPT1 '%[%033[30;1m%]%m/%/ %[%033[31;1m%]%R%#%[%033[0m%] '
 \set PROMPT2 '%[%033[30;1m%]%m/%/ %[%033[31;1m%]%R%#%[%033[0m%] '
 \set PROMPT3 '%[%033[31;1m%]>>%[%033[0m%] '
+
+\set PROMPT1 '%M:%[%033[1;31m%]%>%[%033[0m%] %n@%/%R%#%x '
 
 \pset border 1
 \pset footer on
 \pset linestyle unicode
-\pset null †
+-- \pset null †
+\pset null 'NULL'
 
 \timing on
+
+\set COMP_KEYWORD_CASE upper
 
 \set HISTCONTROL ignoredups
 
 -- Add timing info to queries
 \timing
+
+\x auto
 
 \set sp 'SHOW search_path;'
 \set clear '\\! clear;'
@@ -49,4 +57,7 @@
 \set pg_total_index_size 'SELECT pg_size_pretty(sum(relpages::bigint*current_setting(''block_size'')::bigint)::bigint) AS size FROM pg_class WHERE reltype=0;'
 \set pg_unused_indexes 'SELECT schemaname || ''.'' || relname AS table, indexrelname AS index, pg_size_pretty(pg_relation_size(i.indexrelid)) AS index_size, idx_scan as index_scans FROM pg_stat_user_indexes ui JOIN pg_index i ON ui.indexrelid = i.indexrelid WHERE NOT indisunique AND idx_scan < 50 AND pg_relation_size(relid) > 5 * current_setting(''block_size'')::bigint ORDER BY pg_relation_size(i.indexrelid) / nullif(idx_scan, 0) DESC NULLS FIRST, pg_relation_size(i.indexrelid) DESC;'
 \set pg_vacuum_stats 'WITH table_opts AS ( SELECT pg_class.oid, relname, nspname, array_to_string(reloptions, '''') AS relopts FROM pg_class INNER JOIN pg_namespace ns ON relnamespace = ns.oid), vacuum_settings AS ( SELECT oid, relname, nspname, CASE WHEN relopts LIKE ''%autovacuum_vacuum_threshold%'' THEN regexp_replace(relopts, ''.*autovacuum_vacuum_threshold=([0-9.]+).*'', E''\\\\\\1'')::integer ELSE current_setting(''autovacuum_vacuum_threshold'')::integer END AS autovacuum_vacuum_threshold, CASE WHEN relopts LIKE ''%autovacuum_vacuum_scale_factor%'' THEN regexp_replace(relopts, ''.*autovacuum_vacuum_scale_factor=([0-9.]+).*'', E''\\\\\\1'')::real ELSE current_setting(''autovacuum_vacuum_scale_factor'')::real END AS autovacuum_vacuum_scale_factor FROM table_opts) SELECT vacuum_settings.nspname AS schema, vacuum_settings.relname AS table, to_char(psut.last_vacuum, ''YYYY-MM-DD HH24:MI'') AS last_vacuum, to_char(psut.last_autovacuum, ''YYYY-MM-DD HH24:MI'') AS last_autovacuum, to_char(pg_class.reltuples, ''9G999G999G999'') AS rowcount, to_char(psut.n_dead_tup, ''9G999G999G999'') AS dead_rowcount, to_char(autovacuum_vacuum_threshold + (autovacuum_vacuum_scale_factor::numeric * pg_class.reltuples), ''9G999G999G999'') AS autovacuum_threshold, CASE WHEN autovacuum_vacuum_threshold + (autovacuum_vacuum_scale_factor::numeric * pg_class.reltuples) < psut.n_dead_tup THEN ''yes'' END AS expect_autovacuum FROM pg_stat_user_tables psut INNER JOIN pg_class ON psut.relid = pg_class.oid INNER JOIN vacuum_settings ON pg_class.oid = vacuum_settings.oid ORDER BY 1, 2;'
+\set uptime 'select now() - pg_postmaster_start_time() AS uptime;'
+\set activity 'select datname, pid, usename, application_name,client_addr, client_hostname, client_port, query, state from pg_stat_activity;'
+
 
