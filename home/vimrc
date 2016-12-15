@@ -5,13 +5,14 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'jpo/vim-railscasts-theme'
 Plugin 'Buffergator'
-Plugin 'nerdtree'
+Plugin 'scrooloose/nerdtree'
 Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'w0ng/vim-hybrid'
 Plugin 'kien/ctrlp.vim'
 Plugin 'godlygeek/tabular.git'
 Plugin 'tommcdo/vim-lion'
 Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'nanotech/jellybeans.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

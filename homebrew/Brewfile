@@ -15,6 +15,7 @@ install the_silver_searcher
 install pow
 install postgresql
 install httpie
+install jq
 install imagemagick
 
 install caskroom/cask/brew-cask
