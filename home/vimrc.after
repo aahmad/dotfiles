@@ -40,7 +40,7 @@ if has("gui_running")
   set sidescrolloff=1
   set guioptions=acemg
   set guifont=source_code_pro:h12
-  "set guifont=Menlo\ Regular:h12
+  " set guifont=Menlo\ Regular:h12
   set guifontwide=source_code_pro:h12
   set guicursor=n:blinkon0,v:blinkon0
   set noballooneval
@@ -99,7 +99,6 @@ set ruler		" show the cursor position all the time
 " These are files we are not likely to want to edit or read.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 
-
 " Make p in Visual mode replace the selected text with the "" register.
 vnoremap p <Esc>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
 
@@ -116,6 +115,8 @@ let NERDTreeQuitOnOpen  = 0
 let NERDTreeMinimalUI   = 1
 let g:NERDTreeWinSize   = 40
 
+
+nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 nnoremap <leader>b :Bookmark<space>
 nnoremap <leader>n :let NERDTreeQuitOnOpen = 0<bar>NERDTreeToggle<cr>
 nnoremap <leader>N :let NERDTreeQuitOnOpen = 1<bar>NERDTreeToggle<cr>
