@@ -11,7 +11,6 @@ try
 catch
 endtry
 
-" UI
 set antialias
 set lazyredraw
 
@@ -25,6 +24,10 @@ set more
 
 set showmatch
 set ttyfast
+
+" Formatting
+set fileformats=unix,dos,mac
+set fileformat=unix
 
 " Theme
 syntax enable
@@ -46,6 +49,11 @@ if has("gui_running")
   set colorcolumn=+1,+2,+3
   set linespace=1
   set fuoptions=maxvert
+  set mouse=a
+  set mousehide
+  set mousemodel=popup
+  set nobackup
+  set nowritebackup
 end
 
 " solarized options
@@ -53,6 +61,7 @@ if !has("gui_running")
 "   let g:solarized_termtrans=1
 "   let g:solarized_termcolors=256
 endif
+
 "colorscheme solarized
 "colorscheme railscasts
 
@@ -77,7 +86,7 @@ set cpoptions=aABceFsmq
 "set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 set statusline=%t%(\ [%n%M]%)%(\ %H%R%W%)\ %(%c-%v,\ %l\ of\ %L%)
 
-" Now we set some defaults for the editor 
+" Now we set some defaults for the editor
 set autoindent		" always set autoindenting on
 set textwidth=0		" Don't wrap words by default
 set nobackup		" Don't keep a backup file
@@ -85,7 +94,6 @@ set viminfo='20,\"50	" read/write a .viminfo file, don't store more than
 			" 50 lines of registers
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
-
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
@@ -141,6 +149,38 @@ map \ /<return>
 map <F3> :set noignorecase<return>
 map <F4> :set ignorecase<return>
 
+
+if has("statusline")
+  set laststatus=2
+
+  set statusline=%.50f\ " space
+	set statusline+=%{StatusLongLineWarning()}
+
+  "display warnings for wrong fileformats, file encodings, and trailing whitespace
+  set statusline+=%#warningmsg#
+  set statusline+=%{&fileformat!='unix'?'['.&fileformat.']':''}
+  set statusline+=%{&fileencoding!='utf-8'?'['.&fileencoding.']':''}
+  set statusline+=%{&bomb==1?'[BOM]':''}
+  set statusline+=%*
+  "
+  "display a warning if &et is wrong, or we have mixed-indenting
+  set statusline+=%#error#
+  set statusline+=%{&paste?'[paste]':''}
+  set statusline+=%*
+
+  set statusline+=%r " read-only flag
+  set statusline+=%m " modified flag
+  set statusline+=%w
+  set statusline+=%{fugitive#statusline()}
+
+  set statusline+=%= "left/right separator
+  set statusline+=%y
+  set statusline+=%{&fileformat=='unix'?'['.&fileformat.']':''}
+  set statusline+=%{&fileencoding=='utf-8'?'['.&fileencoding.']':''}
+  set statusline+=[U+%04B]
+  set statusline+=[%4l/%L,%3v][%P]
+endif
+
 " dupe tag and make an ending tag
 " map <F5> GVgg:!mkvixml<return>
 
@@ -188,6 +228,14 @@ let perl_extended_vars = 1
 let perl_include_pod = 1
 " let perl_fold=1
 " let perl_fold_blocks=1
+
+" Fugitive
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gc :Gcommit<cr>
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gp :Git push<cr>
+nnoremap <leader>gs :Gstatus<cr>
 
 " Tabularize
 
@@ -242,4 +290,73 @@ function! CSVH(colnr)
     match
   endif
 endfunction
+
+function! StatusTabWarning()
+  if !exists("b:status_tab_warning")
+    let tabs   = search('^\t', 'nw') != 0
+    let spaces = search('^ ', 'nw')  != 0
+
+    if tabs && spaces
+      let b:status_tab_warning = '[mixed-indenting]'
+    elseif (spaces && !&et) || (tabs && &et)
+      let b:status_tab_warning = '[expandtab]'
+    else
+      let b:status_tab_warning = ''
+    endif
+  endif
+
+  return b:status_tab_warning
+endfunction
+
+" return a list containing the lengths of the long lines in this buffer
+function! s:LongLines()
+  let threshold = (&textwidth ? &textwidth : 120)
+  let spaces = repeat(" ", &ts)
+
+  let long_line_lengths = []
+
+  let i = 1
+  while i <= line("$")
+    let len = strlen(substitute(getline(i), '\t', spaces, 'g'))
+
+    if len > threshold
+      call add(long_line_lengths, len)
+    endif
+
+    let i += 1
+  endwhile
+
+  return long_line_lengths
+endfunction
+
+" find the median of the given array of numbers
+function! s:Median(nums)
+  let nums = sort(a:nums)
+  let l = len(nums)
+
+  if l % 2 == 1
+    let i = (l - 1) / 2
+    return nums[i]
+  else
+    return (nums[1/2] + nums[(1/2)-1]) / 2
+  endif
+endfunction
+
+function! StatusLongLineWarning()
+  if !exists("b:status_long_line_warning")
+    let long_line_lengths = s:LongLines()
+
+    if len(long_line_lengths) > 0
+      let b:status_long_line_warning = "[" .
+            \ '#' . len(long_line_lengths) . "," .
+            \ 'm' . s:Median(long_line_lengths) . "," .
+            \ '$' . max(long_line_lengths) . "]"
+    else
+      let b:status_long_line_warning = ""
+    endif
+  endif
+
+  return b:status_long_line_warning
+endfunction
+
 command! -nargs=1 Csv :call CSVH(<args>)
