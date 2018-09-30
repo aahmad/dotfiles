@@ -39,9 +39,9 @@ if has("gui_running")
   set scrolloff=3
   set sidescrolloff=1
   set guioptions=acemg
-  set guifont=source_code_pro:h12
+  set guifont=source_code_pro:h13
   " set guifont=Menlo\ Regular:h12
-  set guifontwide=source_code_pro:h12
+  set guifontwide=source_code_pro:h13
   set guicursor=n:blinkon0,v:blinkon0
   set noballooneval
   set cursorline

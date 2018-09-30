@@ -35,6 +35,8 @@ cask alfred link
 
 tap caskroom/fonts
 cask install font-source-code-pro
+cask install font-roboto-mono
+
 # cleanup
 brew cleanup --force
 rm -f -r /Library/Caches/Homebrew/*
