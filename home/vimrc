@@ -13,7 +13,10 @@ Plugin 'godlygeek/tabular.git'
 Plugin 'tommcdo/vim-lion'
 Plugin 'AndrewRadev/splitjoin.vim'
 Plugin 'nanotech/jellybeans.vim' 
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
+
+":PluginInstall \vi
 
 call vundle#end()            " required
 filetype plugin indent on    " required

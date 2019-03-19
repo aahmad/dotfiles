@@ -62,14 +62,10 @@ if !has("gui_running")
 "   let g:solarized_termcolors=256
 endif
 
-"colorscheme solarized
-"colorscheme railscasts
-
-"let g:hybrid_use_iTerm_colors = 1
-" colorscheme hybrid
-colorscheme jellybeans
-" colorscheme sexy-railscasts-256
-" colorscheme distinguished
+" http://vimcolors.com/
+" colorscheme jellybeans solarized distinguished wombat basic-dark iceberg
+" monokain skyhawk twilight falcon turtles
+colorscheme molokai
 
 " Indent
 set ai
