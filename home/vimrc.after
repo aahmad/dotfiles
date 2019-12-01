@@ -65,7 +65,7 @@ endif
 " http://vimcolors.com/
 " colorscheme jellybeans solarized distinguished wombat basic-dark iceberg
 " monokain skyhawk twilight falcon turtles molokai monokai metalheart
-colorscheme metalheart
+colorscheme onedark
 
 " Indent
 set ai
