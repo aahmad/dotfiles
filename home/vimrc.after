@@ -34,7 +34,7 @@ set fileformat=unix
 " Theme
 syntax enable
 " set relativenumber
-set background=dark
+set background=light
 
 if has("gui_running")
   autocmd GUIEnter * set vb t_vb=
@@ -66,8 +66,10 @@ endif
 
 " http://vimcolors.com/
 " colorscheme jellybeans solarized distinguished wombat basic-dark iceberg
-" monokain skyhawk twilight falcon turtles molokai monokai metalheart
+" monokain skyhawk twilight falcon turtles molokai metalheart
+" colorscheme metalheart
 colorscheme onedark
+let g:airline_theme='jellybeans'
 
 " Indent
 set ai
@@ -113,7 +115,6 @@ let NERDTreeQuitOnOpen  = 0
 let NERDTreeMinimalUI   = 1
 let g:NERDTreeWinSize   = 40
 
-
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 nnoremap <leader>b :Bookmark<space>
 nnoremap <leader>n :let NERDTreeQuitOnOpen = 0<bar>NERDTreeToggle<cr>
@@ -147,7 +148,6 @@ map \ /<return>
 " some autokeys
 map <F3> :set noignorecase<return>
 map <F4> :set ignorecase<return>
-
 
 if has("statusline")
   set laststatus=2
