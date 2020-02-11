@@ -3,6 +3,7 @@ behave xterm
 syntax enable
 set nocompatible
 set title
+set termguicolors
 
 set directory^=$HOME/.vim/swap//
 
@@ -34,7 +35,7 @@ set fileformat=unix
 " Theme
 syntax enable
 " set relativenumber
-set background=light
+set background=dark
 
 if has("gui_running")
   autocmd GUIEnter * set vb t_vb=
@@ -43,8 +44,8 @@ if has("gui_running")
   set guioptions=acemg
   " set guifont=source_code_pro:h13
   " set guifont=Menlo\ Regular:h12
-  " set guifontwide=source_code_pro:h13
   set guifont=dank_mono:h14
+  set guifontwide=source_code_pro:h13
   set guicursor=n:blinkon0,v:blinkon0
   set noballooneval
   set cursorline
@@ -69,7 +70,11 @@ endif
 " colorscheme jellybeans solarized distinguished wombat basic-dark iceberg
 " monokain skyhawk twilight falcon turtles molokai metalheart
 " colorscheme metalheart
-colorscheme onedark
+" colorscheme onedark
+" colorscheme edge
+" colorscheme corvine
+" colorscheme eighties
+colorscheme night-owl
 let g:airline_theme='jellybeans'
 
 " Indent
@@ -115,6 +120,11 @@ let NERDTreeHijackNetrw = 1
 let NERDTreeQuitOnOpen  = 0
 let NERDTreeMinimalUI   = 1
 let g:NERDTreeWinSize   = 40
+
+" Indentation
+let g:indentLine_enabled = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+nnoremap <leader>il :IndentLinesToggle<cr>
 
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 nnoremap <leader>b :Bookmark<space>
