@@ -20,6 +20,9 @@ set lazyredraw
 set ruler
 set number
 
+" Automatically resize vertical splits.
+au WinEnter * :set winfixheight
+
 set cmdheight=3
 set showmode
 set showcmd
@@ -37,15 +40,23 @@ syntax enable
 " set relativenumber
 set background=dark
 
+fu GetTerm()
+    terminal
+    wincmd x
+    res 40
+endfu
+
 if has("gui_running")
   autocmd GUIEnter * set vb t_vb=
   set scrolloff=3
   set sidescrolloff=1
   set guioptions=acemg
-  " set guifont=source_code_pro:h13
+  set guifont=font
   " set guifont=Menlo\ Regular:h12
-  set guifont=dank_mono:h14
-  set guifontwide=source_code_pro:h13
+  " set guifont=source_code_pro:h13
+  "set guifontwide=source_code_pro:h13
+  " set guifont=dank_mono:h14
+  set guifont=Cascadia\ Code:h14
   set guicursor=n:blinkon0,v:blinkon0
   set noballooneval
   set cursorline
@@ -60,6 +71,14 @@ if has("gui_running")
   set nowritebackup
 end
 
+" Indentation
+let g:indentLine_enabled = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
 " solarized options
 if !has("gui_running")
 "   let g:solarized_termtrans=1
@@ -68,15 +87,20 @@ endif
 
 " http://vimcolors.com/
 " colorscheme jellybeans solarized distinguished wombat basic-dark iceberg
-" monokain skyhawk twilight falcon turtles molokai metalheart
+" monokain skyhawk twilight falcon turtles molokai monokai metalheart
 " colorscheme metalheart
+" colorscheme gruvbox
 " colorscheme onedark
-" colorscheme edge
-" colorscheme corvine
-" colorscheme eighties
-colorscheme night-owl
-let g:airline_theme='jellybeans'
+" colorscheme plastic
+"colorscheme edge
+"colorscheme night-owl
+colorscheme onedark
+" colorscheme nord
 
+let g:edge_style = 'neon'
+let g:edge_disable_italic_comment = 1
+
+let g:airline_theme='jellybeans'
 " Indent
 set ai
 set si
@@ -86,20 +110,20 @@ set et
 " remove change the following statements
 " TEST
 
-set backspace=indent,eol,start	" more powerful backspacing
+set backspace=indent,eol,start  " more powerful backspacing
 
 set cpoptions=aABceFsmq
 "set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
-set statusline=%t%(\ [%n%M]%)%(\ %H%R%W%)\ %(%c-%v,\ %l\ of\ %L%)
+ set statusline=%t%(\ [%n%M]%)%(\ %H%R%W%)\ %(%c-%v,\ %l\ of\ %L%)
 
 " Now we set some defaults for the editor
-set autoindent		" always set autoindenting on
-set textwidth=0		" Don't wrap words by default
-set nobackup		" Don't keep a backup file
-set viminfo='20,\"50	" read/write a .viminfo file, don't store more than
-			" 50 lines of registers
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
+set autoindent          " always set autoindenting on
+set textwidth=0         " Don't wrap words by default
+set nobackup            " Don't keep a backup file
+set viminfo='20,\"50    " read/write a .viminfo file, don't store more than
+                        " 50 lines of registers
+set history=50          " keep 50 lines of command line history
+set ruler               " show the cursor position all the time
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
@@ -115,16 +139,16 @@ hi Comment  term=bold ctermfg=5 guifg=#80a0ff
 set iskeyword+=:
 
 " NERDTreeType mapping
+autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeHijackNetrw = 1
 let NERDTreeQuitOnOpen  = 0
 let NERDTreeMinimalUI   = 1
 let g:NERDTreeWinSize   = 40
 
-" Indentation
-let g:indentLine_enabled = 0
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-nnoremap <leader>il :IndentLinesToggle<cr>
 
 nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 nnoremap <leader>b :Bookmark<space>
@@ -137,9 +161,31 @@ nnoremap - :NERDTreeFind<cr>
 nnoremap j gj
 nnoremap k gk
 
+set hidden
+nnoremap <Leader>N :bnext<CR>
+nnoremap <Leader>P :bprev<CR>
+
+
 " nmap <silent> <F3> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" fzf buffer
+map <Leader>m :Buffers<CR>
+let g:fzf_preview_highlighter = "highlight -o xterm256 --line-number --style rdark --force"
+let g:fzf_preview_window = 'right:65%'
+" let g:fzf_layout = { 'window':  { 'width': 1.0, 'height': 1.0, 'relative': v:true } }
+
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+command! -bang -nargs=* Find
+  \ call fzf#vim#grep(
+  \   'rg -g "!node_modules" --column --line-number --no-heading --color=always '.shellescape(expand('<cword>')), 1,
+  \   fzf#vim#with_preview(),
+  \   <bang>0)
+
+command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
 
 " The following are commented out as they cause vim to behave a lot
 " different from regular vi. They are highly recommended though.
@@ -160,11 +206,14 @@ map \ /<return>
 map <F3> :set noignorecase<return>
 map <F4> :set ignorecase<return>
 
+
 if has("statusline")
   set laststatus=2
 
   set statusline=%.50f\ " space
-	set statusline+=%{StatusLongLineWarning()}
+        set statusline+=%{StatusLongLineWarning()}
+
+  hi UnwantedTrailerTrash guibg=red ctermbg=red
 
   "display warnings for wrong fileformats, file encodings, and trailing whitespace
   set statusline+=%#warningmsg#
@@ -196,7 +245,7 @@ endif
 
 " Cut out empty end lines
 "nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-autocmd FileType c,cpp,java,php,python,ruby,perl autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,cpp,java,php,python,ruby,perl,elixir autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " run mikes mkxml command externally to clean up
 map <F9> :!mkvixml<return>
@@ -224,6 +273,8 @@ nnoremap <leader>vl :PluginList<cr>
 nnoremap <leader>vi :PluginInstall<cr>
 nnoremap <leader>vu :PluginInstall!<cr>
 nnoremap <leader>vs :PluginSearch<space>
+
+nnoremap <leader>il :IndentLinesToggle<cr>
 
 " Ruby
 nnoremap <leader>tr :botright :vsplit config/routes.rb<cr>

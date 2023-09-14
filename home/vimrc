@@ -8,20 +8,33 @@ Plugin 'Buffergator'
 Plugin 'scrooloose/nerdtree'
 Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Plugin 'w0ng/vim-hybrid'
+"Plugin 'kien/ctrlp.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'godlygeek/tabular.git'
 Plugin 'tommcdo/vim-lion'
 Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'nanotech/jellybeans.vim' 
+Plugin 'nanotech/jellybeans.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'tpope/vim-fugitive'
+Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'flrnprz/plastic.vim'
 Plugin 'sainnhe/edge'
 Plugin 'haishanh/night-owl.vim'
+Plugin 'skalnik/vim-vroom'
+"Plugin 'bitc/vim-bad-whitespace'
+Plugin 'csexton/trailertrash.vim'
+Plugin 'ap/vim-buftabline'
+Plugin 'meain/vim-startify'
 Plugin 'Yggdroot/indentLine'
+Plugin 'elixir-editors/vim-elixir'
+Plugin 'joukevandermaas/vim-ember-hbs'
+Plugin 'joshdick/onedark.vim'
+Plugin 'arcticicestudio/nord-vim'
+Plugin 'fatih/vim-go'
+Plugin 'udalov/kotlin-vim'
 
 ":PluginInstall \vi
 
@@ -33,3 +46,4 @@ filetype plugin indent on    " required
 if filereadable(expand("~/.vimrc.after"))
   source ~/.vimrc.after
 endif
+
