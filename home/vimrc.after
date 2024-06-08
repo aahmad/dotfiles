@@ -16,6 +16,7 @@ endtry
 
 set antialias
 set lazyredraw
+set noswapfile
 
 set ruler
 set number
@@ -54,9 +55,9 @@ if has("gui_running")
   set guifont=font
   " set guifont=Menlo\ Regular:h12
   " set guifont=source_code_pro:h13
-  "set guifontwide=source_code_pro:h13
+  " set guifontwide=source_code_pro:h13
   " set guifont=dank_mono:h14
-  set guifont=Cascadia\ Code:h14
+  set guifont=Cascadia\ Mono\ Regular:h14
   set guicursor=n:blinkon0,v:blinkon0
   set noballooneval
   set cursorline
@@ -71,6 +72,9 @@ if has("gui_running")
   set nowritebackup
 end
 
+" Set Leader
+let mapleader = ","
+
 " Indentation
 let g:indentLine_enabled = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -78,6 +82,7 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline_theme = 'embark'
 
 " solarized options
 if !has("gui_running")
@@ -92,10 +97,14 @@ endif
 " colorscheme gruvbox
 " colorscheme onedark
 " colorscheme plastic
-"colorscheme edge
-"colorscheme night-owl
-colorscheme onedark
+" colorscheme edge
+" colorscheme night-owl
+" colorscheme onedark
 " colorscheme nord
+" colorscheme embark
+
+colorscheme tokyonight
+let g:tokyonight_style = 'storm' " available: night, storm
 
 let g:edge_style = 'neon'
 let g:edge_disable_italic_comment = 1
@@ -164,7 +173,6 @@ nnoremap k gk
 set hidden
 nnoremap <Leader>N :bnext<CR>
 nnoremap <Leader>P :bprev<CR>
-
 
 " nmap <silent> <F3> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
@@ -291,12 +299,12 @@ let perl_include_pod = 1
 " let perl_fold_blocks=1
 
 " Fugitive
-nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gc :Gcommit<cr>
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gl :Glog<cr>
+nnoremap <leader>gd :Git diff<cr>
+nnoremap <leader>gl :Git log<cr>
 nnoremap <leader>gp :Git push<cr>
-nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gs :Git status<cr>
 
 " Tabularize
 

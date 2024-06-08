@@ -1,6 +1,5 @@
 alias ls='ls -GFh'
 alias be='bundle exec'
-alias vim_install_plugins='vim +PluginInstall +qall'
 
 alias ..='cd ..'
 
@@ -12,6 +11,3 @@ alias gh="git help"
 alias gs="git s"
 
 alias dotfiles='cd $DOTFILES'
-
-alias elasticsearch='lunchy start elasticsearch'
-

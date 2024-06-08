@@ -1,47 +1,46 @@
-" Vundle (Plugins)
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'jpo/vim-railscasts-theme'
-Plugin 'Buffergator'
-Plugin 'scrooloose/nerdtree'
-Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-Plugin 'w0ng/vim-hybrid'
-"Plugin 'kien/ctrlp.vim'
-Plugin 'junegunn/fzf'
-Plugin 'junegunn/fzf.vim'
-Plugin 'godlygeek/tabular.git'
-Plugin 'tommcdo/vim-lion'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tpope/vim-fugitive'
-Plugin 'morhetz/gruvbox'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'flrnprz/plastic.vim'
-Plugin 'sainnhe/edge'
-Plugin 'haishanh/night-owl.vim'
-Plugin 'skalnik/vim-vroom'
-"Plugin 'bitc/vim-bad-whitespace'
-Plugin 'csexton/trailertrash.vim'
-Plugin 'ap/vim-buftabline'
-Plugin 'meain/vim-startify'
-Plugin 'Yggdroot/indentLine'
-Plugin 'elixir-editors/vim-elixir'
-Plugin 'joukevandermaas/vim-ember-hbs'
-Plugin 'joshdick/onedark.vim'
-Plugin 'arcticicestudio/nord-vim'
-Plugin 'fatih/vim-go'
-Plugin 'udalov/kotlin-vim'
+Plug 'gmarik/Vundle.vim'
+Plug 'jpo/vim-railscasts-theme'
+Plug 'jeetsukumaran/vim-buffergator'
+Plug 'scrooloose/nerdtree'
+Plug 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Plug 'w0ng/vim-hybrid'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'tommcdo/vim-lion'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'flrnprz/plastic.vim'
+Plug 'sainnhe/edge'
+Plug 'haishanh/night-owl.vim'
+Plug 'skalnik/vim-vroom'
+Plug 'csexton/trailertrash.vim'
+Plug 'ap/vim-buftabline'
+Plug 'Yggdroot/indentLine'
+Plug 'elixir-editors/vim-elixir'
+Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'fatih/vim-go'
+Plug 'meain/vim-startify'
+Plug 'udalov/kotlin-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-rails'
+Plug 'embark-theme/vim'
+Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sheerun/vim-polyglot'
+Plug 'ghifarit53/tokyonight-vim'
 
-":PluginInstall \vi
+call plug#end()
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-"execute pathogen#infect()
+" :PlugInstall
 
 if filereadable(expand("~/.vimrc.after"))
   source ~/.vimrc.after
