@@ -93,6 +93,7 @@ config.keys = {
   { key = "RightArrow", mods = "OPT", action=wezterm.action{SendString="\x1bf"} },
   { key = 'LeftArrow', mods = 'CMD', action = act.ActivateTabRelative(-1), },
   { key = 'RightArrow', mods = 'CMD', action = act.ActivateTabRelative(1), },
+  { key = 'k', mods = 'CMD', action = act.ClearScrollback 'ScrollbackAndViewport', },
 }
 
 -- and finally, return the configuration to wezterm
